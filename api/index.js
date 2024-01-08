@@ -5,6 +5,7 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import hotelRoute from "./routes/hotel.js";
 import roomsRoute from "./routes/rooms.js";
+import cookieParser from "cookie-parser";
 //craeting a variable for express framework
 const app=express()
 
@@ -34,6 +35,7 @@ const connect=async()=>{
 
 
 //Middleware-Middleware gets executed after the server receives the request and before the controller actions send the response.
+app.use(cookieParser())
 app.use(express.json())
 
 app.use("/api/auth",authRoute)
