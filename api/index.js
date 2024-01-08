@@ -40,7 +40,18 @@ app.use("/api/auth",authRoute)
 app.use("/api/users",usersRoute)
 app.use("/api/rooms",roomsRoute)
 app.use("/api/hotel",hotelRoute)
+//error handling middleware
+app.use((err,req,res,next)=>{
+    const errorMessage=err.message || "Something went wrong"
+    const errorStatus=err.status || 500
+    return res.status(errorStatus).json({
+        success:false,
+        status:errorStatus,
+        message:errorMessage,
+        stack:err.stack  
 
+    })
+})
 //listen to the connections on the specified host and port.
 app.listen(8000,()=>{
     connect()
