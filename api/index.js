@@ -29,14 +29,17 @@ const connect=async()=>{
 // })
 
 
+
 //Middleware-Middleware gets executed after the server receives the request and before the controller actions send the response.
+app.use(express.json())
+
 app.use("/api/auth",router)
 app.use("/api/users",router)
 app.use("/api/rooms",router)
 app.use("/api/hotel",router)
 
 //listen to the connections on the specified host and port.
-app.listen(5000,()=>{
+app.listen(8000,()=>{
     connect()
     console.log("Connected to backend")
 })
