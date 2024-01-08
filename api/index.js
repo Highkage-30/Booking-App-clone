@@ -1,7 +1,10 @@
 import  express from "express"; 
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import router from "./routes/auth.js";
+import authRoute from "./routes/auth.js";
+import usersRoute from "./routes/users.js";
+import hotelRoute from "./routes/hotel.js";
+import roomsRoute from "./routes/rooms.js";
 //craeting a variable for express framework
 const app=express()
 
@@ -33,10 +36,10 @@ const connect=async()=>{
 //Middleware-Middleware gets executed after the server receives the request and before the controller actions send the response.
 app.use(express.json())
 
-app.use("/api/auth",router)
-app.use("/api/users",router)
-app.use("/api/rooms",router)
-app.use("/api/hotel",router)
+app.use("/api/auth",authRoute)
+app.use("/api/users",usersRoute)
+app.use("/api/rooms",roomsRoute)
+app.use("/api/hotel",hotelRoute)
 
 //listen to the connections on the specified host and port.
 app.listen(8000,()=>{
