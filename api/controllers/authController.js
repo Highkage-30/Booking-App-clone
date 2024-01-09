@@ -4,7 +4,6 @@ import { createError } from "../utils/error.js"
 import jwt from "jsonwebtoken";
 export const Register=async(req,res,next)=>{
     try {
-        //bcrypt to encrypt the password
         const salt=bcrypt.genSaltSync(10)
         const hash =bcrypt.hashSync(req.body.password,salt)
         const newUser=new User({
@@ -20,7 +19,6 @@ export const Register=async(req,res,next)=>{
 }
 export const Login=async(req,res,next)=>{
     try {
-
         const user=await User.findOne({username:req.body.username})
         if(!user) return next(createError(404,"User not found"))
 
@@ -29,8 +27,8 @@ export const Login=async(req,res,next)=>{
 
         const token=jwt.sign({id:user._id,isAdmin:user.isAdmin},process.env.JWT)
 
+
         const {password,isAdmin,...otherDetails}=user._doc;    
-        //jwt token stored in cookies
         res.cookie("access_token",token,{
             httpOnly:true,
         }).status(200).json({...otherDetails});
