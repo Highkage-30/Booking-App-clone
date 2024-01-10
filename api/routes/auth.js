@@ -1,10 +1,9 @@
 import express from "express";
-import { Login, Register } from "../controllers/authController.js";
+import { login, register } from "../controllers/auth.js";
 
+const router = express.Router();
 
-//This function is used when you want to create a new router object in your program to handle requests. 
-const router=express.Router();
+router.post("/register", register)
+router.post("/login", login)
 
-router.post("/register",Register)
-router.post("/login",Login)
-export default router;
+export default router

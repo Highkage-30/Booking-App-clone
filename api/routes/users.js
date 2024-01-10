@@ -1,26 +1,36 @@
 import express from "express";
-import { deleteUser, getAllUser, getUser, updateUser } from "../controllers/userController.js";
-import { verifyAdmin, verifyToken, verifyUser } from "../utils/verify.js";
+import {
+  updateUser,
+  deleteUser,
+  getUser,
+  getUsers,
+} from "../controllers/user.js";
+import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
 
-//This function is used when you want to create a new router object in your program to handle requests. 
-const router=express.Router();
-//authentication
-// router.get("/checkauthentication",verifyToken,(req,res,next)=>{
-//     res.send("You are logged in")
+const router = express.Router();
+
+// router.get("/checkauthentication", verifyToken, (req,res,next)=>{
+//   res.send("hello user, you are logged in")
 // })
-// router.get("/checkuser/:id",verifyUser,(req,res,next)=>{
-//     res.send("Hello user,You can delete your account")
+
+// router.get("/checkuser/:id", verifyUser, (req,res,next)=>{
+//   res.send("hello user, you are logged in and you can delete your account")
 // })
-// router.get("/checkadmin/:id",verifyAdmin,(req,res,next)=>{
-//     res.send("Hello admin,You can delete all accounts")
+
+// router.get("/checkadmin/:id", verifyAdmin, (req,res,next)=>{
+//   res.send("hello admin, you are logged in and you can delete all accounts")
 // })
-// Update data , pass the id through url params
-router.put("/:id",verifyUser,updateUser)
-//Delete hotel
-router.delete("/:id",verifyUser,deleteUser)
-//get one
-router.get("/:id",verifyUser,getUser)
-// get all id
-router.get("/",verifyAdmin,getAllUser)
+
+//UPDATE
+router.put("/:id", verifyUser, updateUser);
+
+//DELETE
+router.delete("/:id", verifyUser, deleteUser);
+
+//GET
+router.get("/:id", verifyUser, getUser);
+
+//GET ALL
+router.get("/", verifyAdmin, getUsers);
 
 export default router;
